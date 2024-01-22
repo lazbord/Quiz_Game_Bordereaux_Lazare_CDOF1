@@ -8,7 +8,7 @@ To run the quiz game, follow these steps:
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/your-username/quiz-game.git
+   git clone https://github.com/lazbord/Quiz_Game_Bordereaux_Lazare_CDOF1
 2. Navigate to the project directory:
     ```bash
     cd quiz-game
