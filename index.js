@@ -1,26 +1,106 @@
 const readline = require('readline');
 
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
 const questions = [
     {
+        topic: 1,
         question: 'What is the capital of France?',
         answer: 'Paris',
     },
     {
+        topic: 1,
         question: 'Which planet is known as the Red Planet?',
         answer: 'Mars',
     },
     {
-        question: 'Who is the biggest faggot of the class?',
-        answer: 'Paul Guiselin',
+        topic: 1,
+        question: 'What is the largest ocean on Earth?',
+        answer: 'Pacific Ocean',
+    },
+    {
+        topic: 1,
+        question: 'What is the tallest mountain in the world?',
+        answer: 'Mount Everest',
+    },
+    {
+        topic: 1,
+        question: 'What is the longest river in the world?',
+        answer: 'Nile',
+    },
+    {
+        topic: 2,
+        question: 'What is the capital of Germany?',
+        answer: 'Berlin',
+    },
+    {
+        topic: 2,
+        question: 'What is the capital of Italy?',
+        answer: 'Rome',
+    },
+    {
+        topic: 2,
+        question: 'What is the capital of Spain?',
+        answer: 'Madrid',
+    },
+    {
+        topic: 2,
+        question: 'What is the capital of Portugal?',
+        answer: 'Lisbon',
+    },
+    {
+        topic: 2,
+        question: 'What is the capital of Greece?',
+        answer: 'Athens',
+    },
+    {
+        topic: 3,
+        question: 'Who wrote "To Kill a Mockingbird"?',
+        answer: 'Harper Lee',
+    },
+    {
+        topic: 3,
+        question: 'Who wrote "1984"?',
+        answer: 'George Orwell',
+    },
+    {
+        topic: 3,
+        question: 'Who wrote "Moby Dick"?',
+        answer: 'Herman Melville',
+    },
+    {
+        topic: 3,
+        question: 'Who wrote "Pride and Prejudice"?',
+        answer: 'Jane Austen',
+    },
+    {
+        topic: 3,
+        question: 'Who wrote "The Great Gatsby"?',
+        answer: 'F. Scott Fitzgerald',
     },
 ];
 
-function startQuiz() {
+function chooseTopic() {
+    rl.question('Choose a topic id (1, 2, 3): ', (topicId) => {
+        const selectedQuestions = questions.filter(q => q.topic === parseInt(topicId));
+        if (selectedQuestions.length > 0) {
+            startQuiz(selectedQuestions);
+        } else {
+            console.log('Invalid topic. Please try again.');
+            chooseTopic();
+        }
+    });
+}
+
+function startQuiz(selectedQuestions) {
     let score = 0;
     let currentQuestionIndex = 0;
 
     function askQuestion() {
-        const currentQuestion = questions[currentQuestionIndex];
+        const currentQuestion = selectedQuestions[currentQuestionIndex];
 
         rl.question(currentQuestion.question + '\nYour answer: ', (userAnswer) => {
             if (userAnswer.toLowerCase() === currentQuestion.answer.toLowerCase()) {
@@ -32,7 +112,7 @@ function startQuiz() {
 
             currentQuestionIndex++;
 
-            if (currentQuestionIndex < questions.length) {
+            if (currentQuestionIndex < selectedQuestions.length) {
                 askQuestion();
             } else {
                 endQuiz();
@@ -41,16 +121,11 @@ function startQuiz() {
     }
 
     function endQuiz() {
-        console.log(`Quiz complete! Your score: ${score}/${questions.length}`);
+        console.log(`Quiz complete! Your score: ${score}/${selectedQuestions.length}`);
         rl.close();
     }
 
     askQuestion();
 }
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-});
-
-startQuiz();
+chooseTopic();
