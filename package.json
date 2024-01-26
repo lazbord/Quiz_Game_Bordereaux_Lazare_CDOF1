@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lazbord/Quiz_Game_Bordereaux_Lazare_CDOF1/issues"
   },
-  "homepage": "https://github.com/lazbord/Quiz_Game_Bordereaux_Lazare_CDOF1#readme"
+  "homepage": "https://github.com/lazbord/Quiz_Game_Bordereaux_Lazare_CDOF1#readme",
+  "devDependencies": {
+    "electron": "^28.1.4"
+  }
 }
